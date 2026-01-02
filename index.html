@@ -1,0 +1,1357 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Kiranya Homestay – Veeralankapalli</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- Google Font -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+  --primary: #2563eb;
+  --secondary: #64748b;
+  --accent: #f59e0b;
+  --success: #10b981;
+  --purple: #8b5cf6;
+  --pink: #ec4899;
+  --bg-white: #ffffff;
+  --bg-glass: rgba(255, 255, 255, 0.9);
+  --text-dark: #1f2937;
+  --text-light: #6b7280;
+  --shadow-main: 0 25px 70px rgba(0, 0, 0, 0.08);
+  --shadow-strong: 0 35px 90px rgba(37, 99, 235, 0.18);
+  --radius-xl: 28px;
+  --radius-lg: 22px;
+  --radius-md: 16px;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: "Poppins", sans-serif;
+  background: var(--bg-white);
+  color: var(--text-dark);
+  line-height: 1.6;
+  min-height: 100vh;
+}
+
+/* subtle animated background */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background-image:
+    radial-gradient(circle at 20% 80%, rgba(37, 99, 235, 0.05) 0%, transparent 55%),
+    radial-gradient(circle at 80% 20%, rgba(139, 92, 246, 0.06) 0%, transparent 55%),
+    radial-gradient(circle at 40% 40%, rgba(245, 158, 11, 0.05) 0%, transparent 60%);
+  z-index: -1;
+  animation: floatBg 22s ease-in-out infinite;
+}
+
+@keyframes floatBg {
+  0%, 100% { transform: translateY(0) scale(1); }
+  50% { transform: translateY(-18px) scale(1.02); }
+}
+
+a { text-decoration: none; color: inherit; }
+
+/* Navbar */
+header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background: var(--bg-glass);
+  color: var(--text-dark);
+  z-index: 1000;
+  box-shadow: var(--shadow-main);
+  backdrop-filter: blur(18px);
+  animation: slideDown 0.7s ease-out;
+}
+
+@keyframes slideDown {
+  from { transform: translateY(-100%); }
+  to { transform: translateY(0); }
+}
+
+.nav-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.1rem 2rem;
+  gap: 1.2rem;
+}
+
+.brand-wrap {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+}
+
+.brand-mark {
+  width: 46px;
+  height: 46px;
+  border-radius: 999px;
+  background: conic-gradient(from 220deg, var(--accent), var(--purple), var(--primary), var(--accent));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #ffffff;
+  font-weight: 700;
+  font-size: 1.05rem;
+  position: relative;
+  box-shadow: 0 10px 30px rgba(37, 99, 235, 0.35);
+  animation: pulseRing 3s ease-in-out infinite;
+}
+
+@keyframes pulseRing {
+  0%, 100% { box-shadow: 0 0 18px rgba(37, 99, 235, 0.5); }
+  50% { box-shadow: 0 0 28px rgba(139, 92, 246, 0.7); }
+}
+
+.brand-mark::after {
+  content: "";
+  position: absolute;
+  inset: 3px;
+  border-radius: inherit;
+  background: #ffffff;
+}
+
+.brand-mark span {
+  position: relative;
+  z-index: 1;
+  color: var(--primary);
+}
+
+.brand-text {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.1;
+}
+
+.brand-title {
+  font-size: 1.08rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  background: linear-gradient(135deg, var(--primary), var(--purple));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.brand-sub {
+  font-size: 0.8rem;
+  color: var(--secondary);
+}
+
+nav {
+  display: flex;
+  align-items: center;
+  gap: 1.3rem;
+}
+
+nav ul {
+  list-style: none;
+  display: flex;
+  gap: 1.2rem;
+  font-size: 0.95rem;
+}
+
+.nav-link {
+  position: relative;
+  padding: 0.55rem 1.1rem;
+  border-radius: 999px;
+  overflow: hidden;
+  transition: transform 0.25s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.25s;
+}
+
+.nav-link::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, var(--accent), var(--purple));
+  transform: scale(0);
+  transform-origin: center;
+  transition: transform 0.25s ease-out;
+  z-index: -1;
+}
+
+.nav-link:hover::before,
+.nav-link.active::before {
+  transform: scale(1);
+}
+
+.nav-link:hover,
+.nav-link.active {
+  color: #ffffff;
+  transform: translateY(-2px);
+  box-shadow: 0 14px 30px rgba(37, 99, 235, 0.25);
+}
+
+/* HERO – slider */
+/* .hero {
+  margin-top: 80px;
+  position: relative;
+  height: 82vh;
+  min-height: 500px;
+  overflow: hidden;
+  border-radius: 0 0 var(--radius-xl) var(--radius-xl);
+  box-shadow: var(--shadow-main);
+} */
+ .hero {
+  margin-top: 80px;
+  position: relative;
+  height: 85vh;  /* Changed from 82vh */
+  min-height: 500px;
+  max-height: 90vh;  /* ADD THIS */
+  overflow: hidden;
+  /* ... rest same */
+}
+
+
+.hero input { display: none; }
+
+.slides {
+  width: 300%;
+  height: 100%;
+  display: flex;
+  transition: margin-left 0.9s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.slide {
+  position: relative;
+  width: 100%;
+ 
+  background-size: cover;
+  background-position: center;
+  animation: slowZoom 14s ease-in-out infinite;
+}
+
+@keyframes slowZoom {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.04); }
+}
+
+/* FIXED Hero - Lighter overlay + better content visibility */
+.slide::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(15,23,42,0.3);
+  z-index: 1;
+}
+
+.slide-content {
+  position: absolute;
+  z-index: 2;
+  max-width: 620px;
+  color: #ffffff;
+  bottom: 14%;
+  left: 10%;
+  padding: 1.4rem 1.6rem;
+  background: rgba(15,23,42,0.7);
+  border-radius: 22px;
+  box-shadow: 0 24px 60px rgba(15, 23, 42, 0.7);
+  backdrop-filter: blur(15px);
+  border: 1px solid rgba(255,255,255,0.2);
+  opacity: 0;
+  animation: heroTextIn 1s cubic-bezier(0.34, 1.56, 0.64, 1) 0.2s forwards;
+}
+
+@keyframes heroTextIn {
+  from { opacity: 0; transform: translateY(30px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.slide-h1 {
+  font-size: clamp(2.4rem, 3vw + 1rem, 3.2rem);
+  margin-bottom: 0.6rem;
+  letter-spacing: 0.04em;
+  text-shadow: 0 3px 18px rgba(0, 0, 0, 0.85);
+}
+
+.slide-p {
+  font-size: 1rem;
+  margin-bottom: 1.2rem;
+  color: rgba(241, 245, 249, 0.92);
+}
+
+.btn-primary {
+  display: inline-block;
+  padding: 0.9rem 2.2rem;
+  background: linear-gradient(135deg, var(--accent), var(--purple));
+  color: #ffffff;
+  border-radius: 999px;
+  font-weight: 600;
+  font-size: 0.98rem;
+  box-shadow: 0 18px 40px rgba(245, 158, 11, 0.5);
+  border: none;
+  cursor: pointer;
+  transform: translateY(6px) scale(0.96);
+  opacity: 0;
+  animation: ctaBounceIn 0.85s ease-out 0.55s forwards;
+}
+
+@keyframes ctaBounceIn {
+  0% { opacity: 0; transform: translateY(18px) scale(0.9); }
+  60% { opacity: 1; transform: translateY(-4px) scale(1.04); }
+  100% { transform: translateY(0) scale(1); }
+}
+
+.btn-primary:hover {
+  transform: translateY(-2px) scale(1.03);
+  box-shadow: 0 26px 70px rgba(245, 158, 11, 0.6);
+}
+
+/* Dots */
+.hero-dots {
+  position: absolute;
+  bottom: 35px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 1rem;
+  z-index: 10;
+}
+
+.dot-label {
+  width: 14px;
+  height: 14px;
+  border-radius: 999px;
+  border: 2px solid rgba(255, 255, 255, 0.7);
+  cursor: pointer;
+  background: rgba(255, 255, 255, 0.3);
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+}
+
+.dot-label:hover {
+  transform: scale(1.18);
+  background: var(--accent);
+  border-color: var(--accent);
+}
+
+#slide-1:checked ~ .slides { margin-left: 0; }
+#slide-2:checked ~ .slides { margin-left: -100%; }
+#slide-3:checked ~ .slides { margin-left: -200%; }
+
+#slide-1:checked ~ .hero-dots label[for="slide-1"],
+#slide-2:checked ~ .hero-dots label[for="slide-2"],
+#slide-3:checked ~ .hero-dots label[for="slide-3"] {
+  background: linear-gradient(135deg, var(--accent), var(--purple));
+  border-color: #ffffff;
+  transform: scale(1.15);
+}
+
+/* Slide Counter */
+.slide-counter {
+  position: absolute;
+  bottom: 35px;
+  right: 30px;
+  font-size: 0.9rem;
+  color: #111827;
+  background: rgba(255, 255, 255, 0.9);
+  padding: 0.45rem 0.9rem;
+  border-radius: 999px;
+  z-index: 10;
+  box-shadow: 0 14px 30px rgba(0,0,0,0.12);
+}
+
+.current-slide {
+  font-weight: 700;
+  color: var(--primary);
+}
+
+/* Sections */
+section {
+  padding: 90px 1.7rem;
+  position: relative;
+}
+
+.section-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* CLEAN Section Titles - Subtle glow only */
+.section-title {
+  font-size: 2.2rem;
+  margin-bottom: 0.5rem;
+  text-align: center;
+  background: linear-gradient(135deg, var(--primary), var(--purple));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  text-shadow: 0 2px 12px rgba(37,99,235,0.2);
+  animation: titleGlow 3s ease-in-out infinite alternate;
+}
+
+@keyframes titleGlow {
+  0% { text-shadow: 0 2px 12px rgba(37,99,235,0.2); }
+  100% { text-shadow: 0 4px 20px rgba(37,99,235,0.4); }
+}
+
+.section-subtitle {
+  text-align: center;
+  font-size: 1rem;
+  color: var(--text-light);
+  margin-bottom: 2.6rem;
+  max-width: 580px;
+  margin-inline: auto;
+}
+
+/* Scroll reveal base */
+.reveal {
+  opacity: 0;
+  transform: translateY(40px);
+  transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+}
+.reveal.show {
+  opacity: 1;
+  transform: translateY(0);
+}
+.reveal-delay-1 { transition-delay: 0.1s; }
+.reveal-delay-2 { transition-delay: 0.2s; }
+.reveal-delay-3 { transition-delay: 0.3s; }
+.reveal-delay-4 { transition-delay: 0.4s; }
+
+/* BEAUTIFUL SECTION BACKGROUNDS */
+#about::before { 
+  content: ""; 
+  position: absolute; 
+  inset: 0; 
+  z-index: -1; 
+  background: radial-gradient(circle at top left, rgba(37,99,235,0.08), transparent 60%); 
+  pointer-events: none; 
+}
+#services::before { 
+  content: ""; 
+  position: absolute; 
+  inset: 0; 
+  z-index: -1; 
+  background: linear-gradient(135deg, rgba(16,185,129,0.06), rgba(139,92,246,0.05)); 
+  pointer-events: none; 
+}
+#gallery::before { 
+  content: ""; 
+  position: absolute; 
+  inset: 0; 
+  z-index: -1; 
+  background: radial-gradient(circle at bottom right, rgba(245,158,11,0.07), transparent); 
+  pointer-events: none; 
+}
+#places::before { 
+  content: ""; 
+  position: absolute; 
+  inset: 0; 
+  z-index: -1; 
+  background: linear-gradient(180deg, rgba(37,99,235,0.04), rgba(16,185,129,0.03)); 
+  pointer-events: none; 
+}
+#contact::before { 
+  content: ""; 
+  position: absolute; 
+  inset: 0; 
+  z-index: -1; 
+  background: radial-gradient(circle at center, rgba(148,163,184,0.1), transparent); 
+  pointer-events: none; 
+}
+
+/* About */
+.about-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 2.4rem;
+  align-items: center;
+}
+
+.about-text p {
+  margin-bottom: 0.8rem;
+  color: var(--text-light);
+  font-size: 0.96rem;
+}
+
+.about-highlights {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+  margin-top: 0.4rem;
+}
+
+.pill {
+  padding: 0.4rem 0.9rem;
+  background: rgba(37, 99, 235, 0.06);
+  border-radius: 999px;
+  font-size: 0.8rem;
+  color: var(--primary);
+  border: 1px solid rgba(37, 99, 235, 0.3);
+}
+
+.about-image {
+  border-radius: var(--radius-xl);
+  overflow: hidden;
+  box-shadow: var(--shadow-main);
+  position: relative;
+  background: rgba(255,255,255,0.9);
+}
+
+.about-image img {
+  width: 100%;
+  display: block;
+  height: 100%;
+  object-fit: cover;
+  transform: scale(1.03);
+  transition: transform 0.7s ease;
+}
+
+.about-image:hover img {
+  transform: scale(1.08);
+}
+
+/* Services */
+.cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+  gap: 1.8rem;
+}
+
+.card {
+  background: var(--bg-glass);
+  backdrop-filter: blur(18px);
+  border-radius: var(--radius-lg);
+  padding: 1.8rem 1.5rem;
+  box-shadow: var(--shadow-main);
+  border: 1px solid rgba(148, 163, 184, 0.25);
+  position: relative;
+  overflow: hidden;
+}
+
+.card::before {
+  content: "";
+  position: absolute;
+  inset: -30%;
+  background: conic-gradient(from 180deg, rgba(37, 99, 235, 0.12), transparent, rgba(139, 92, 246, 0.12), transparent);
+  opacity: 0;
+  transition: opacity 0.35s ease;
+}
+
+.card:hover::before { opacity: 1; }
+
+.card:hover {
+  transform: translateY(-10px);
+  box-shadow: var(--shadow-strong);
+  animation: floatGlow 2.5s ease-in-out infinite;
+}
+
+.card h3 {
+  margin-bottom: 0.4rem;
+  color: var(--text-dark);
+  font-size: 1.05rem;
+}
+
+.card p {
+  font-size: 0.9rem;
+  color: var(--text-light);
+  margin-bottom: 0.7rem;
+}
+
+.card span {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--primary);
+}
+
+/* Gallery */
+.gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1.4rem;
+}
+
+.gallery-item {
+  position: relative;
+  overflow: hidden;
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-main);
+  background: #ffffff;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.gallery-item:hover {
+  transform: translateY(-8px);
+  box-shadow: var(--shadow-strong);
+  animation: floatGlow 2.5s ease-in-out infinite;
+}
+
+.gallery-item img {
+  width: 100%;
+  height: 230px;
+  object-fit: cover;
+  transition: transform 0.5s ease, filter 0.5s ease;
+}
+
+.gallery-item:hover img {
+  transform: scale(1.07);
+  filter: brightness(1.05) saturate(1.12);
+}
+
+.gallery-caption {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 0.6rem 0.8rem;
+  background: linear-gradient(to top, rgba(17, 24, 39, 0.85), transparent);
+  color: #f9fafb;
+  font-size: 0.85rem;
+}
+
+/* GALLERY GLOW */
+.gallery-item::after {
+  content: ""; 
+  position: absolute; 
+  inset: 0;
+  background: radial-gradient(circle, rgba(255,255,255,0.1), transparent 70%);
+  opacity: 0; 
+  transition: opacity 0.4s ease;
+  border-radius: inherit;
+}
+.gallery-item:hover::after { opacity: 1; }
+
+/* Nearby Places */
+.places-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+  gap: 1.6rem;
+}
+
+.place {
+  display: block;
+  background: var(--bg-glass);
+  backdrop-filter: blur(18px);
+  border-radius: var(--radius-lg);
+  padding: 1.2rem 1.3rem;
+  border-left: 4px solid var(--primary);
+  box-shadow: var(--shadow-main);
+  transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+}
+
+.place:hover {
+  transform: translateY(-8px);
+  box-shadow: var(--shadow-strong);
+  border-left-color: var(--accent);
+  animation: floatGlow 2.5s ease-in-out infinite;
+}
+
+.place h3 {
+  font-size: 1rem;
+  margin-bottom: 0.2rem;
+  color: var(--text-dark);
+}
+
+.place span {
+  font-size: 0.8rem;
+  color: var(--text-light);
+  display: block;
+  margin-bottom: 0.45rem;
+}
+
+.place p {
+  font-size: 0.9rem;
+  color: var(--text-dark);
+}
+
+/* Contact + Map */
+.contact-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.25fr) minmax(0, 1.5fr);
+  gap: 2rem;
+}
+
+.contact-card {
+  background: var(--bg-glass);
+  backdrop-filter: blur(18px);
+  padding: 2rem 1.8rem;
+  border-radius: var(--radius-xl);
+  box-shadow: var(--shadow-main);
+  border: 1px solid rgba(148, 163, 184, 0.28);
+}
+
+.contact-card h3 {
+  margin-bottom: 0.4rem;
+  color: var(--primary);
+}
+
+.contact-card p {
+  font-size: 0.9rem;
+  margin-bottom: 0.8rem;
+  color: var(--text-light);
+}
+
+.contact-info {
+  font-size: 0.9rem;
+  margin-top: 0.9rem;
+  color: var(--text-dark);
+}
+
+.contact-info div { margin-bottom: 0.3rem; }
+
+form {
+  margin-top: 1rem;
+  display: grid;
+  gap: 0.8rem;
+}
+
+input,
+textarea {
+  padding: 0.7rem 0.8rem;
+  border-radius: 12px;
+  border: 1px solid rgba(148, 163, 184, 0.65);
+  font-family: inherit;
+  font-size: 0.9rem;
+  outline: none;
+  background: #ffffff;
+  color: var(--text-dark);
+  transition: border 0.25s ease, box-shadow 0.25s ease;
+}
+
+input:focus,
+textarea:focus {
+  border-color: var(--primary);
+  box-shadow: 0 0 0 4px rgba(37,99,235,0.25);
+}
+
+textarea { resize: vertical; min-height: 110px; }
+
+.btn-outline {
+  border-radius: 999px;
+  border: 2px solid var(--primary);
+  background: transparent;
+  padding: 0.55rem 1.3rem;
+  cursor: pointer;
+  font-weight: 600;
+  color: var(--primary);
+  font-size: 0.9rem;
+  justify-self: flex-start;
+  transition: all 0.3s ease;
+}
+
+.btn-outline:hover {
+  background: var(--primary);
+  color: #ffffff;
+  box-shadow: 0 18px 40px rgba(37, 99, 235, 0.3);
+  transform: translateY(-2px);
+}
+
+.map-wrapper {
+  border-radius: var(--radius-xl);
+  overflow: hidden;
+  box-shadow: var(--shadow-main);
+  min-height: 280px;
+  position: relative;
+}
+
+.map-wrapper iframe {
+  border: 0;
+  width: 100%;
+  height: 100%;
+  min-height: 280px;
+  filter: grayscale(10%) contrast(1.04) saturate(1.06);
+}
+
+/* Footer */
+footer {
+  background: #0f172a;
+  color: #e5e7eb;
+  padding: 1.8rem 1.7rem;
+  margin-top: 40px;
+}
+
+.footer-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 0.6rem;
+  font-size: 0.82rem;
+}
+
+.footer-inner span strong {
+  color: #f9fafb;
+}
+
+/* Booking Modal */
+.booking-modal {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(15, 23, 42, 0.75);
+  z-index: 2000;
+  backdrop-filter: blur(12px);
+}
+
+.modal-content {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(0.85);
+  background: var(--bg-glass);
+  padding: 2.4rem 2rem;
+  border-radius: var(--radius-xl);
+  max-width: 460px;
+  width: 92%;
+  box-shadow: 0 40px 85px rgba(15, 23, 42, 0.55);
+  border: 1px solid rgba(148, 163, 184, 0.4);
+  opacity: 0;
+  animation: modalIn 0.35s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+}
+
+@keyframes modalIn {
+  to { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+}
+
+.close-modal {
+  position: absolute;
+  top: 0.9rem;
+  right: 1.2rem;
+  font-size: 1.8rem;
+  cursor: pointer;
+  color: var(--text-light);
+  transition: transform 0.25s ease, color 0.25s ease;
+}
+
+.close-modal:hover {
+  transform: rotate(90deg);
+  color: var(--primary);
+}
+
+.modal-content h2 {
+  margin-bottom: 0.4rem;
+  color: var(--primary);
+}
+
+.modal-content p {
+  font-size: 0.9rem;
+  color: var(--text-light);
+  margin-bottom: 1.2rem;
+}
+
+.modal-content form input,
+.modal-content form textarea {
+  width: 100%;
+}
+
+.modal-content form button {
+  width: 100%;
+  margin-top: 0.4rem;
+  border-radius: 999px;
+  border: none;
+  padding: 0.8rem 1.3rem;
+  font-weight: 600;
+  background: linear-gradient(135deg, var(--primary), var(--purple));
+  color: #ffffff;
+  cursor: pointer;
+  box-shadow: 0 18px 40px rgba(37, 99, 235, 0.35);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.modal-content form button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 28px 60px rgba(37, 99, 235, 0.5);
+}
+
+/* ENHANCED CARDS FLOATING ANIMATION */
+@keyframes floatGlow {
+  0%,100% { transform: translateY(0) scale(1); box-shadow: var(--shadow-main); }
+  50% { transform: translateY(-6px) scale(1.02); box-shadow: var(--shadow-strong); }
+}
+
+/* Responsive */
+@media (max-width: 900px) {
+  .hero {
+    border-radius: 0 0 var(--radius-lg) var(--radius-lg);
+    min-height: 460px;
+  }
+  .slide-counter {
+    bottom: 25px;
+    right: 20px;
+    font-size: 0.8rem;
+  }
+  .hero-dots { bottom: 25px; }
+}
+
+@media (max-width: 768px) {
+  .slide-content {
+    left: 7%;
+    right: 7%;
+    bottom: 10%;
+  }
+  .slide-content h1 { font-size: 2.1rem; }
+  .contact-grid { grid-template-columns: 1fr; }
+  nav ul { font-size: 0.9rem; gap: 0.7rem; }
+  section { padding: 80px 1.4rem; }
+  .nav-container { flex-wrap: wrap; }
+  .slide-counter {
+    bottom: 20px;
+    right: 15px;
+  }
+}
+
+@media (max-height: 700px) { 
+  .hero { height: 75vh; min-height: 450px; } 
+}
+
+  
+  
+  </style>
+</head>
+<body>
+
+  <!-- Navbar -->
+  <header>
+    <div class="nav-container">
+      <div class="brand-wrap">
+        <div class="brand-mark"><span>KH</span></div>
+        <div class="brand-text">
+          <span class="brand-title">Kiranya</span>
+          <span class="brand-sub">Homestay • Veeralankapalli</span>
+        </div>
+      </div>
+      <nav>
+        <ul>
+          <li><a href="#home" class="nav-link active">Home</a></li>
+          <li><a href="#gallery" class="nav-link">Gallery</a></li>
+          <li><a href="#services" class="nav-link">Experience</a></li>
+          <li><a href="#places" class="nav-link">Nearby</a></li>
+          <li><a href="#about" class="nav-link">About</a></li>
+          <li><a href="#contact" class="nav-link">Contact</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Hero Slider -->
+  <section class="hero" id="home">
+    <!-- Radio buttons for slides -->
+    <input type="radio" name="hero" id="slide-1" checked>
+    <input type="radio" name="hero" id="slide-2">
+    <input type="radio" name="hero" id="slide-3">
+
+    <!-- Slides Container -->
+    <div class="slides">
+      <!-- Slide 1 ✅ FIXED image path -->
+      <div class="slide" style="background-image: linear-gradient(rgba(15,23,42,0.4), rgba(37,99,235,0.3)), url('images/WhatsApp Image 2025-12-18 at 5.27.41 PM (1).jpeg');">
+        <div class="slide-content">
+          <h1 class="slide-h1">Wake Up In Godavari Greens</h1>
+          <p class="slide-p">Misty mornings, chirping birds, cozy cottage in Veeralankapalli</p>
+          <a href="#contact" class="btn-primary booking-trigger">Book Now</a>
+        </div>
+      </div>
+
+      <!-- Slide 2 ✅ FIXED image path -->
+      <div class="slide" style="background-image: linear-gradient(rgba(15,23,42,0.35), rgba(139,92,246,0.25)), url('images/WhatsApp Image 2025-12-18 at 5.27.42 PM.jpeg');">
+        <div class="slide-content">
+          <h1 class="slide-h1">Evenings By Water Pond</h1>
+          <p class="slide-p">Lanterns, soft lights, peaceful village silence</p>
+          <a href="#gallery" class="btn-primary booking-trigger">View Gallery</a>
+        </div>
+      </div>
+
+      <!-- Slide 3 ✅ FIXED image path -->
+      <div class="slide" style="background-image: linear-gradient(rgba(15,23,42,0.4), rgba(16,185,129,0.3)), url('images/WhatsApp Image 2025-12-18 at 5.27.42 PM (1).jpeg');">
+        <div class="slide-content">
+          <h1 class="slide-h1">Slow Life Under Palms</h1>
+          <p class="slide-p">Fruit plants, organic patches, family courtyards</p>
+          <a href="#services" class="btn-primary booking-trigger">Our Experiences</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Navigation Dots -->
+    <div class="hero-dots">
+      <label for="slide-1" class="dot-label"></label>
+      <label for="slide-2" class="dot-label"></label>
+      <label for="slide-3" class="dot-label"></label>
+    </div>
+    
+    <!-- ✅ FIXED Slide Counter -->
+    <div class="slide-counter">
+      <span class="current-slide" id="currentSlide">1</span> / <span class="total-slides">3</span>
+    </div>
+  </section>
+
+
+  <!-- About -->
+  <section id="about">
+    <div class="section-inner reveal">
+      <h2 class="section-title">About Kiranya Homestay</h2>
+      <p class="section-subtitle">
+        A serene eco‑stay in Veeralankapalli, Gokavaram mandal, surrounded by Godavari greenery and village life.
+      </p>
+
+      <div class="about-grid">
+        <div class="about-text reveal reveal-delay-1">
+          <p>
+            Kiranya Homestay is a cozy countryside stay located in Veeralankapalli, Gokavaram Mandal, East Godavari, Andhra Pradesh (Pin: 533286).
+          </p>
+          <p>
+            The property features simple village‑style architecture, leafy pathways, a small water pond, and warm interiors ideal for nature lovers and spiritual seekers.
+          </p>
+          <div class="about-highlights">
+            <span class="pill">Private Cottage Rooms</span>
+            <span class="pill">Mini Splash Pond</span>
+            <span class="pill">Village &amp; Farm Views</span>
+            <span class="pill">Temple Walks Nearby</span>
+            <span class="pill">Solar &amp; Rainwater Use</span>
+          </div>
+        </div>
+        <div class="about-image reveal reveal-delay-2">
+          <img src="images/WhatsApp Image 2025-12-18 at 5.27.41 PM (2).jpeg" alt="Kiranya homestay exterior night view">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Services -->
+  <section id="services">
+    <div class="section-inner reveal">
+      <h2 class="section-title">Eco‑Focus &amp; Experiences</h2>
+      <p class="section-subtitle">
+        Stay close to nature with sustainable practices, local food, and slow‑paced rural experiences.
+      </p>
+
+      <div class="cards">
+        <div class="card reveal reveal-delay-1">
+          <h3>Sustainable Stay</h3>
+          <p>Clean, minimal rooms with basic comforts, solar power usage, rainwater harvesting, and low‑waste operations.</p>
+          <span>Simple, grounded village living.</span>
+        </div>
+
+        <div class="card reveal reveal-delay-2">
+          <h3>Nature Walks</h3>
+          <p>Walk through coconut and fruit trees, nearby fields, and village paths ideal for sunrise and sunset strolls.</p>
+          <span>Perfect for calm photography.</span>
+        </div>
+
+        <div class="card reveal reveal-delay-3">
+          <h3>Organic Farm‑To‑Table</h3>
+          <p>Home‑style meals using locally sourced ingredients with authentic East Godavari village flavors.</p>
+          <span>Veg &amp; non‑veg on prior order.</span>
+        </div>
+
+        <div class="card reveal reveal-delay-4">
+          <h3>Workshops &amp; Quiet Time</h3>
+          <p>Space suited for reading, journaling, potting plants, and small group activities focused on mindful, slow living.</p>
+          <span>Great for weekend reset.</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Gallery -->
+  <section id="gallery">
+    <div class="section-inner reveal">
+      <h2 class="section-title">Kiranya Gallery</h2>
+      <p class="section-subtitle">Evening cottage views, pond and cozy interiors.</p>
+
+      <div class="gallery-grid">
+
+        <div class="gallery-item reveal reveal-delay-1">
+          <img src="images/WhatsApp Image 2025-12-18 at 5.27.41 PM (1).jpeg"
+               alt="Kiranya homestay board with cart">
+          <div class="gallery-caption">Kiranya Homestay board with vintage cart</div>
+        </div>
+
+        <div class="gallery-item reveal reveal-delay-2">
+          <img src="images/WhatsApp Image 2025-12-18 at 5.27.42 PM (2).jpeg"
+               alt="Cottage front view in evening">
+          <div class="gallery-caption">Front view of Kiranya cottage in the evening</div>
+        </div>
+
+        <div class="gallery-item reveal reveal-delay-3">
+          <img src="images/WhatsApp Image 2025-12-18 at 5.27.41 PM (2).jpeg"
+               alt="Side view of cottage at night">
+          <div class="gallery-caption">Side view of the lit‑up cottage at night</div>
+        </div>
+
+        <div class="gallery-item reveal reveal-delay-4">
+          <img src="images/WhatsApp Image 2025-12-18 at 5.27.42 PM (1).jpeg"
+               alt="Cart and branding near entrance">
+          <div class="gallery-caption">Cart and Kiranya branding near the entrance</div>
+        </div>
+
+        <div class="gallery-item reveal reveal-delay-2">
+          <img src="images/WhatsApp Image 2025-12-18 at 5.27.42 PM (3).jpeg"
+               alt="Bedroom interior with wooden cot">
+          <div class="gallery-caption">Cozy bedroom with wooden cot and lanterns</div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Nearby Places -->
+  <section id="places">
+    <div class="section-inner reveal">
+      <h2 class="section-title">Nearby Temples &amp; Sights</h2>
+      <p class="section-subtitle">Popular spiritual spots and nature points within a short drive.</p>
+
+      <div class="places-grid">
+
+        <a class="place reveal reveal-delay-1" href="https://www.google.com/maps/search/?api=1&query=Korukonda+Sri+Rama+Temple+Gokavaram" target="_blank">
+          <h3>Korukonda Sri Rama Temple</h3>
+          <span>Approx. 6 km • Gokavaram</span>
+          <p>Ancient hill temple dedicated to Lord Rama, known for festivals and scenic steps.</p>
+        </a>
+
+        <a class="place reveal reveal-delay-2" href="https://www.google.com/maps/search/?api=1&query=Thantikonda+Temple" target="_blank">
+          <h3>Thantikonda (Thanti Konda)</h3>
+          <span>Approx. 7 km</span>
+          <p>Hilltop with beautiful views and small trekking trails around the countryside.</p>
+        </a>
+
+        <a class="place reveal reveal-delay-3" href="https://www.google.com/maps/search/?api=1&query=Achhutapuram+Anjaneya+Swamy+Temple" target="_blank">
+          <h3>Achhutapuram Anjaneya Swamy</h3>
+          <span>Approx. 8 km</span>
+          <p>Hanuman temple in a calm village setting, ideal for peaceful darshan.</p>
+        </a>
+
+        <a class="place reveal reveal-delay-4" href="https://www.google.com/maps/search/?api=1&query=Guadala+Sri+Ramalayam" target="_blank">
+          <h3>Guadala Sri Ramalayam</h3>
+          <span>Approx. 9 km</span>
+          <p>Serene temple surrounded by rural charm and quiet village lanes.</p>
+        </a>
+
+        <a class="place reveal reveal-delay-2" href="https://www.google.com/maps/search/?api=1&query=Veerabhadra+Swamy+Temple+Gokavaram" target="_blank">
+          <h3>Veerabhadra Swamy Temple, Gokavaram</h3>
+          <span>Approx. 5 km</span>
+          <p>Shiva shrine visited by locals, often combined with other nearby temples.</p>
+        </a>
+
+        <a class="place reveal reveal-delay-3" href="https://www.google.com/maps/search/?api=1&query=Veeralankapalli+temple" target="_blank">
+          <h3>Local Temples – Walkable</h3>
+          <span>Approx. 0.1 – 0.3 km</span>
+          <p>Small village shrines like Anjaneya Swamy, Gubbalammathalli, and Ramalayam just a short walk away.</p>
+        </a>
+
+        <a class="place reveal reveal-delay-4" href="https://www.google.com/maps/search/?api=1&query=Kagita+Krishna+Rao+Garden" target="_blank">
+          <h3>Kagita Krishna Rao Garden</h3>
+          <span>Approx. 1.2 km</span>
+          <p>Green garden area with access to Godavari river boating through local operators.</p>
+        </a>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact + Map -->
+  <section id="contact">
+    <div class="section-inner reveal">
+      <h2 class="section-title">Contact &amp; Location</h2>
+      <p class="section-subtitle">Reach Kiranya Homestay easily from Rajahmundry and nearby towns.</p>
+
+      <div class="contact-grid">
+        <div class="contact-card reveal reveal-delay-1">
+          <h3>Plan Your Stay</h3>
+          <p>Share your dates and group size and you will receive tariff details and available experiences.</p>
+
+          <form>
+            <input type="text" placeholder="Your Name" required>
+            <input type="tel" placeholder="Phone Number" required>
+            <textarea placeholder="Preferred dates / Number of guests / Any special request" required></textarea>
+            <button type="submit" class="btn-outline booking-trigger">Submit Enquiry</button>
+          </form>
+
+          <div class="contact-info">
+            <div><strong>Call / WhatsApp:</strong> +91‑99668 81859</div>
+            <div><strong>Location:</strong> Kiranya Homestay, Veeralankapalli, Gokavaram Mandal, East Godavari, Andhra Pradesh 533286</div>
+            <div><strong>By Road:</strong> Rajahmundry → Gokavaram (30 km) → Veeralankapalli (3 km)</div>
+            <div><strong>Nearest Rail:</strong> Rajahmundry Railway Station (≈35 km)</div>
+          </div>
+        </div>
+
+        <div class="map-wrapper reveal reveal-delay-2">
+          <iframe
+            loading="lazy"
+            allowfullscreen
+            referrerpolicy="no-referrer-when-downgrade"
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3810.8778876854426!2d81.84980027420568!3d17.224712207472994!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3a370d2fedb49019%3A0xd3de59a7f26afa90!2sKiranya%20homestay!5e0!3m2!1sen!2sin!4v1766137341956!5m2!1sen!2sin">
+          </iframe>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="footer-inner">
+      <span>&copy; 2025 <strong>Kiranya Homestay</strong>, Veeralankapalli. All rights reserved.</span>
+      <!-- <span>Designed with HTML &amp; CSS • Static demo for booking info</span> -->
+    </div>
+  </footer>
+
+  <!-- Booking Popup Modal -->
+  <div class="booking-modal" id="bookingModal">
+    <div class="modal-content">
+      <span class="close-modal" id="closeModal">&times;</span>
+      <h2>Send Booking Enquiry</h2>
+      <p>Share your basic details and you will receive a WhatsApp / call with tariffs and availability.</p>
+      <form id="bookingForm">
+        <input type="text" placeholder="Your Name" required>
+        <input type="tel" placeholder="Phone / WhatsApp" required>
+        <textarea placeholder="Dates, no. of guests, any special request" required></textarea>
+        <button type="submit">Send Enquiry</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- JavaScript: slider + popup + scroll reveal -->
+ 
+  <!-- JavaScript: slider + popup + scroll reveal -->
+<script>
+// 🔥 HERO SLIDER - AUTO ADVANCE ONLY (NO HOVER PAUSE)
+const slidesIds = ["slide-1", "slide-2", "slide-3"];
+let currentIndex = 0;
+let sliderInterval;
+let isPaused = false;
+
+const currentSlideEl = document.getElementById("currentSlide");
+
+function updateCounter() {
+  if (currentSlideEl) {
+    currentSlideEl.textContent = currentIndex + 1;
+  }
+}
+
+function showNextSlide() {
+  currentIndex = (currentIndex + 1) % slidesIds.length;
+  const radioId = slidesIds[currentIndex];
+  const radioBtn = document.getElementById(radioId);
+  
+  if (radioBtn) {
+    radioBtn.checked = true;
+    updateCounter();
+  }
+}
+
+function startAutoPlay() {
+  sliderInterval = setInterval(showNextSlide, 5000); // 5s auto-advance
+}
+
+function pauseAutoPlay() {
+  clearInterval(sliderInterval);
+  isPaused = true;
+}
+
+function resumeAutoPlay() {
+  isPaused = false;
+  startAutoPlay();
+}
+
+// Dots click only
+slidesIds.forEach((id, index) => {
+  const radio = document.getElementById(id);
+  if (radio) {
+    radio.addEventListener("change", () => {
+      currentIndex = index;
+      updateCounter();
+      pauseAutoPlay();
+      setTimeout(resumeAutoPlay, 5000);
+    });
+  }
+});
+
+// Mobile swipe only (no hover)
+const heroSection = document.querySelector(".hero");
+let touchStartX = 0;
+if (heroSection) {
+  heroSection.addEventListener("touchstart", (e) => {
+    touchStartX = e.changedTouches[0].screenX;
+    pauseAutoPlay();
+  });
+  
+  heroSection.addEventListener("touchend", (e) => {
+    const touchEndX = e.changedTouches[0].screenX;
+    const diff = touchStartX - touchEndX;
+    if (Math.abs(diff) > 50) {
+      if (diff > 0) showNextSlide();
+      else {
+        currentIndex = (currentIndex - 1 + slidesIds.length) % slidesIds.length;
+        document.getElementById(slidesIds[currentIndex]).checked = true;
+        updateCounter();
+      }
+    }
+    setTimeout(resumeAutoPlay, 3000);
+  });
+}
+
+// START IMMEDIATELY
+updateCounter();
+startAutoPlay();
+
+// Scroll reveal + nav + modal code same as before...
+const observerOptions = { threshold: 0.1, rootMargin: '0px 0px -50px 0px' };
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) entry.target.classList.add('show');
+  });
+}, observerOptions);
+
+document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+window.addEventListener('scroll', () => {
+  const sections = document.querySelectorAll('section');
+  let current = '';
+  sections.forEach(section => {
+    if (scrollY >= section.offsetTop - 200) {
+      current = section.getAttribute('id');
+    }
+  });
+  document.querySelectorAll('.nav-link').forEach(link => {
+    link.classList.remove('active');
+    if (link.getAttribute('href') === `#${current}`) {
+      link.classList.add('active');
+    }
+  });
+});
+
+document.querySelectorAll('.booking-trigger').forEach(btn => {
+  btn.addEventListener('click', (e) => {
+    e.preventDefault();
+    document.getElementById('bookingModal').style.display = 'block';
+  });
+});
+
+document.getElementById('closeModal').addEventListener('click', () => {
+  document.getElementById('bookingModal').style.display = 'none';
+});
+
+document.getElementById('bookingForm').addEventListener('submit', (e) => {
+  e.preventDefault();
+  alert('Enquiry sent! WhatsApp: +91-99668 81859');
+  document.getElementById('bookingModal').style.display = 'none';
+  document.getElementById('bookingForm').reset();
+});
+
+window.addEventListener('click', (e) => {
+  const modal = document.getElementById('bookingModal');
+  if (e.target === modal) modal.style.display = 'none';
+});
+
+
+
+</script>
+
+</body>
+</html>
